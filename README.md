@@ -10,4 +10,8 @@ pokemon based game
 
   for now
 </pre>
-https://kashumy.github.io/Pokemon-Web/ 
+
+- Play
+https://kashumy.github.io/Pokemon-Web/
+
+⭐ give me star :)
