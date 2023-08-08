@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<html onclick="document.documentElement.requestFullscreen()">
+<audio id="audio" src="./10 New Bark Town.mp3"></audio>
+<audio id="saudio"  src="./startbattle.mp3"></audio>
+
+
+<div id="IdhGf"  style="display:none ;position: fixed;z-index :999;bottom: 10px; left: 50%; transform: translateX(-50%); background-color: #ffcc00; border: 2px solid #333; border-radius: 10px; padding: 10px; width: 300px; font-family: 'Arial', sans-serif;">
+    <p style="margin: 0; font-size: 14px; color: #333; font-weight: bold;">Siter Joy :</p>
+    <p style="margin: 0; font-size: 12px; color: #333;">Your pokemon are fully restored hp</p>
+</div>
+
+
+<script>
+  function idk1(){
+    document.getElementById('IdhGf2').style.display ="block"
+    setTimeout (function (){
+      document.getElementById('IdhGf2').style.display ="none "
+    },500)
+  }
+</script>
+<div id="IdhGf2"  style="display:none ;position: fixed;z-index :999;bottom: 10px; left: 50%; transform: translateX(-50%); background-color: #ffcc00; border: 2px solid #333; border-radius: 10px; padding: 10px; width: 300px; font-family: 'Arial', sans-serif;">
+  <p style="margin: 0; font-size: 14px; color: #333; font-weight: bold;">Info :</p>
+  <p style="margin: 0; font-size: 12px; color: #333;">Maded by ( Kashumy.github Krystian Nexaturion )</p>
+</div>
+
+
+<script>
+  function update1(){
+    document.getElementById('berries').innerText=`   Your berries :`+berries;
+    document.getElementById('data1').innerText=`   Your current pokemon lv :`+lv +`\n   Your current pokemon hp :`+health+` \n   Pokemon + ${yourpokmnlist[currentPokemonIndex].name}`;
+    if(health > 100){
+      health -= 4;     
+    }
+    setTimeout(function() {
+      bushes = 0;
+    }, 500)
+    setTimeout(update1,500)
+    
+  }
+setTimeout(update1,1000)
+</script>
+<svg>
+  <filter id="pixelate" x="0" y="0">
+    <feFlood x="0.3" y="0.3" height="0.3" width="0.3" />
+
+    <feComposite width="1.0" height="1.0" />
+
+    <feTile result="a" />
+
+    <feComposite in="SourceGraphic" in2="a" operator="in" />
+
+    <feMorphology operator="dilate" radius="0.1965" />
+  </filter>
+
+
+  <filter id="pixelate2" x="0" y="0">
+    <feFlood x="0.3" y="0.3" height="0.02" width="0.02" />
+
+    <feComposite width="0.1" height="0.1" />
+
+    <feTile result="a" />
+
+    <feComposite in="SourceGraphic" in2="a" operator="in" />
+
+    <feMorphology operator="dilate" radius="0.009" />
+  </filter>
+</svg>
+
+
+<!-- 
+     MIT    
+-->
+<title>emb  emulator by K.P</title>
+<div class="darkness">
+
+</div>
+
+<div id="viewport">
+
+  <div id="ctx-board" style="width:100%;height :100%;">
+    <div id="content"></div>
+  </div>
+
+  <div class="player" onclick="idk1()">
+    <img style="margin-top:3px; width:20px;height :20px" src="./red.WebP">
+  </div>
+
+
+
+</div>
+
+<div class="joystick">
+  <div class="stick"></div>
+</div>
+<div id="jump" class="jump">
+
+</div>
+<div id="btno" onclick="document.getElementById('menu2').classList.toggle('hide')"  class="btno">
+<!--<img src="./obutton.WebP" style="position :absolute ; width :100%;height :100%; filter: brightness(0.4);" alt="">-->
+
+</div>
+<div id="cns">
+  <p id="fps"></p>
+  <p id="console"></p>
+</div>
+
+
+     <div id="menu2" class="hide" style="width: calc(150% - 50px); height :300px;position:absolute;z-index:8; top:50vh;left:calc(50vw - 2px);transform:translate(-50%,-50%);background :rgba(20,20,20,1) ;color:rgba(200,200,200,1)  ;font-size:94%; " ><div style="padding: 20px;color:white ;background :rgba(50,50,50,1) ;" >  Menu </div>
+<pre>
+
+<div onclick="document.getElementById('menu2').classList.toggle('hide')"  >Close tab</div>
+
+<div id="berries"  ></div>
+<div id="data1">
+  
+</div>
+<div onclick="pkmn()"  >chose next pokemon</div>
+
+
+</pre>
+     </div>
+
+
+<style>
+.hide{
+  display: none ;
+}
+  #cns {
+    position: absolute ;
+    top: 0px;
+
+    left: 0px;
+    z-index: 998999999999999999;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  .darkness {
+    position: absolute;
+    width: 100vw;
+    display :none ;
+    top: 0;
+    left: 0;
+    background-image: radial-gradient(circle, #00000026 20%, #000000D1 50%);
+    height: 100vh;
+    z-index: 2;
+    left: 0;
+  }
+
+  #woter {
+    position: absolute;
+    width: 150vw;
+
+    background-image: radial-gradient(circle, #00000026 20%, #000000D1 50%);
+    height: 100vh;
+    z-index: 1;
+    animation: 2s d infinite;
+  }
+
+  @keyframes d {
+    0% {
+      rotate: 20deg;
+      opacity: 0.1;
+    }
+
+    100% {
+      rotate: 30deg;
+      opacity: 0.01;
+    }
+  }
+
+  #console {
+    position: fixed;
+filter: url("#pixelate");
+    top: 0;
+  }
+
+  .player {
+    position: absolute;
+filter: url("#pixelate");
+    z-index: 3;
+    overflow: hidden;
+
+
+    width: 19px;
+    background: #FF000000;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+
+  body {
+    position: fixed;
+    background: #000000;
+    color: #FFFFFF;
+  }
+
+  #fps {
+    position: absolute ;
+    filter: url("#pixelate");
+    top: 20px;
+    z-index :99999999999999999999999999;
+  }
+
+  .joystick {
+    position: fixed;
+    z-index: 2;
+    bottom: 80px;
+    left: 25px;
+    width: 120px;
+    height: 120px;
+    border-radius: 0%;
+    background-color: #2F2F31;
+  }
+
+  .jump {
+    position: fixed;
+    z-index: 2;
+    bottom: 30px;
+    right: 25px;
+    width: 100px;
+    height: 100px;
+    border-radius: 0%;
+    background-color: #2F2F31;
+  }
+
+  .btno {
+    position: fixed;
+    z-index: 2;
+    bottom: 160px;
+    right: 25px;
+    width: 100px;
+    height: 100px;
+    border-radius: 0%;
+    background-color: #2F2F31;
+  }
+
+
+  .jump:active {
+    background-color: #384547;
+  }
+
+  .stick {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 35px;
+    left: 35px;
+    border-radius: 0%;
+    background-color: #494A50;
+  }
+
+  #viewport {
+    width: calc(150% - 10px);
+    height: 300px;
+    overflow: auto;
+    transform: translate(-50%, -50%);
+    top: 30vh;
+    left: 33vw;
+    background: #024208;
+    position: absolute;
+    
+    zoom: 1.5;
+  }
+
+  #content {
+    position: absolute;
+    
+    width: 1000px;
+    height: 1000px;
+    overflow: hidden;
+    background-image: url("./2023-08-06_10.28.46.WebP");
+    background-size: 32px;
+    
+  }
+@keyframes DN {
+  0%{
+    filter : brightness(1.3) ;
+  }
+  50%{
+    filter : brightness(0.5) ;
+  }
+  100%{
+    filter : brightness(1.3) ;
+  }
+}
+  .tile {
+    position: absolute;
+    background-image: url("./tree.WebP");
+    width: 32px;
+    height: 32px;
+    background-size: 110%;
+
+    box-sizing: border-box;
+  }
+    .dywan {
+      position: absolute;
+      background-color: #6B0707;
+      width: 32px;
+      height: 32px;
+      background-size: 110%;
+  
+      box-sizing: border-box;
+    }
+  .tile6 {
+    position: absolute;
+    background-image: url("./brick.WebP");
+    width: 32px;
+    height: 32px;
+    background-size: 100%;
+
+    box-sizing: border-box;
+  }
+    .tile7 {
+      position: absolute;
+      background-image: url("./wood.WebP");
+      width: 32px;
+      height: 32px;
+      background-size: 100%;
+  
+      box-sizing: border-box;
+    }
+    .grasstile {
+      position: absolute;
+      background-image: url("./2023-08-06_10.31.39.WebP");
+      width: 32px;
+      height: 32px;
+      background-size: 100%;
+  
+      box-sizing: border-box;
+    }
+  .tile4 {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-color: #181F1600;
+    border: 1px solid #181F1600;
+    box-sizing: border-box;
+  }
+
+  .tile2 {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    
+    
+    background-size: 110%;
+
+    background-color: #12121200;
+    border: 1px solid #12121200;
+    box-sizing: border-box;
+  }
+
+  .tile5 {
+    position: absolute;
+    width: 33px;
+    height: 33px;
+
+    background: #806649;
+
+    
+    box-sizing: border-box;
+  }
+    .tile-1 {
+      position: absolute;
+      width: 33px;
+      height: 33px;
+  
+      background: #0E1DC9;
+  
+  
+      box-sizing: border-box;
+    }
+</style>
+
+<script src="./index.js"></script>
+
+<script>
+  var fps = document.getElementById("fps");
+  var startTime = Date.now();
+  var frame = 0;
+  var VelocityY = 0;
+
+  function tick() {
+    var time = Date.now();
+    frame++;
+    if (time - startTime > 1000) {
+      fps.innerHTML = (frame / ((time - startTime) / 1000)).toFixed(1);
+      startTime = time;
+      frame = 0;
+    }
+    VelocityY += 0.04
+    //  movePlayer(0,0.02*VelocityY)
+if(jp==1){
+  speedoff=0.8;
+  if (Math.floor(Math.random() * 600) === 1 && bushes==1)  {
+    
+    battle()
+  }
+}else {
+  speedoff=2;
+}
+    requestAnimationFrame(tick);
+  }
+  setTimeout(tick, 200)
+</script>
+<script>
+  var stick = document.querySelector('.stick');
+  var joystick = document.querySelector('.joystick');
+  var joystickRect = joystick.getBoundingClientRect();
+
+  let isDragging = false;
+  let joystickX = 0;
+  let joystickY = 0;
+  var x = 0
+  var y = 0
+
+  var b = document.getElementById('jump')
+var jp=0;
+  b.addEventListener('touchstart', function() {
+    jp=1;
+  })
+  b.addEventListener('touchend', function() {
+    jp=0;
+  })
+
+  function jump() {
+    let zasab = 0;
+    if (Topcol == 1) {
+      for (let i = 0; i < 50; i++) {
+        if (zasab < 200) {
+          zasab += 10;
+        } else {
+          zasab += 40;
+        }
+        setTimeout(function() {
+
+          movup()
+
+        }, zasab)
+      }
+    }
+  }
+
+  function movright() {
+    movePlayer(-0.06, 0)
+  }
+
+  function movleft() {
+    movePlayer(0.06, 0)
+  }
+
+  function movup() {
+    movePlayer(0, -0.06)
+  }
+
+  function movdown() {
+    movePlayer(0, 0.06)
+  }
+
+  function updateJoystick(event) {
+    let x, y;
+    if (event.type === 'touchmove') {
+      x = event.touches[0].clientX - joystickRect.left - joystickRect.width / 2;
+      y = event.touches[0].clientY - joystickRect.top - joystickRect.height / 2;
+    } else {
+      x = event.clientX - joystickRect.left - joystickRect.width / 2;
+      y = event.clientY - joystickRect.top - joystickRect.height / 2;
+      
+      
+    }
+    if (x > 30) {
+      movleft()
+    }
+    if (x < 30) {
+      movright()
+    }
+if (Math.floor(Math.random() * 200) === 1 && bushes==1) {
+  
+  
+  battle()
+}
+    const distance = Math.sqrt(x * x + y * y);
+    const angle = Math.atan2(y, x);
+    const maxDistance = joystickRect.width / 1.8 - stick.getBoundingClientRect().width / 2;
+    if (y < -40 && distance > 40) {
+      movup()
+    }
+    if (y > 40 && distance > 40) {
+      movdown()
+    }
+    if (distance > maxDistance) {
+      x = Math.cos(angle) * maxDistance;
+      y = Math.sin(angle) * maxDistance;
+    }
+
+    stick.style.transform = `translate(${x}px, ${y}px)`;
+
+
+  }
+
+  stick.addEventListener('mousedown', event => {
+    isDragging = true;
+    updateJoystick(event);
+  });
+
+  joystick.addEventListener('mousemove', event => {
+    if (isDragging) {
+      updateJoystick(event);
+    }
+  });
+
+  joystick.addEventListener('mouseup', () => {
+    isDragging = false;
+    stick.style.transform = 'translate(0px, 0px)';
+  });
+
+  var toonce = 0
+  stick.addEventListener('touchstart', event => {
+    event.preventDefault();
+    isDragging = true;
+    if (toonce === 0) {
+      aud = document.getElementById('audio')
+      aud.play()
+      aud.loop = true;
+      if (aud.currentTime > 0) {
+        toonce = 1
+      }
+      aud.currentTime = 0;
+    }
+    updateJoystick(event);
+  });
+
+  joystick.addEventListener('touchmove', event => {
+    event.preventDefault();
+    if (isDragging) {
+      updateJoystick(event);
+    }
+  });
+
+  joystick.addEventListener('touchend', () => {
+    isDragging = false;
+    stick.style.transform = 'translate(0px, 0px)';
+  });
+</script>
+<script>
+setTimeout(updateall,1000)
+  const player = document.querySelector('.player');
+  var tileSize2 = 40;
+
+  let playerX = 42;
+  let playerY = 38;
+  // Przewiń stronę do określonej pozycji
+
+  var thix = 0
+  var thiy = 0
+  var board = document.getElementById('content')
+var speedoff=2
+
+
+  function movePlayer(dxy, dyy) {
+    dx = dxy / speedoff
+    dy = dyy / speedoff
+    
+    if (playerY > 200000) {
+      playerX = 2;
+      playerY = 2;
+      VelocityY = 0;
+    } else if (playerY < 0) {
+      playerX = 2;
+      playerY = 2;
+    }
+
+    viewport.scrollTo((playerX * tileSize2) - innerWidth / 5, (playerY * tileSize2) - innerHeight / innerHeight * 150)
+    playerX += dx;
+    thiy = dy;
+    thix = dx;
+    playerY += dy;
+    collision(dx, dy)
+    document.getElementById('console').innerHTML = 'x:' + Math.floor(playerX) + 'y:' + Math.floor(playerY)
+
+    player.style.left = playerX * tileSize2 + 'px';
+    player.style.top = playerY * tileSize2 + 'px';
+    to2 += 0.05;
+    if (to2 > 5) {
+      updateall()
+      to2 = 0;
+    }
+  }
+
+  var to2 = 0;
+
+  function updateall() {
+    updateViewport()
+    constructn()
+  }
+
+
+  // Przykład użycia
+
+
+  // Przykład użycia
+
+
+
+
+
+var bushes=0;
+
+  var tiles = document.querySelectorAll('.c');
+var Grass = document.querySelectorAll('.g');
+var PkCR = document.querySelectorAll('.tile-1');
+
+  function constructn() {
+    tiles = document.querySelectorAll(".c");
+Grass = document.querySelectorAll('.g');
+PkCR= document.querySelectorAll('.tile-1');
+  }
+
+
+  var topside = 0
+  var Topcol = 0;
+  var Centercol = 0;
+
+  function collision(dx, dy) {
+    for (let tile of tiles) {
+      const rect1 = player.getBoundingClientRect();
+      const rect2 = tile.getBoundingClientRect();
+      const wallThickness = 2;
+      if (rect1.right > rect2.left - wallThickness && rect1.left < rect2.left && rect1.bottom > rect2.top && rect1.top < rect2.bottom) {
+
+
+
+        // blokuje poruszanie x
+
+        playerX -= 0.05;
+
+
+        player.style.left = playerX * tileSize + 'px';
+        player.style.top = playerY * tileSize + 'px';
+
+        collide = 1
+        return;
+      } else
+      if (rect1.bottom > rect2.top + 5 &&
+        rect1.top < rect2.bottom - 10 &&
+        rect1.right + 5 > rect2.left + 5 &&
+        rect1.left < rect2.right - 5) {
+        console.log("oh")
+        VelocityY = -0.01;
+        Centercol = 1;
+        topside = 0;
+        playerY -= 0.1;
+        playerX -= 0.3;
+      } else {
+
+        Centercol = 0
+
+      }
+      if (rect1.left < rect2.right + wallThickness && rect1.right > rect2.right && rect1.bottom > rect2.top + wallThickness && rect1.top < rect2.bottom - wallThickness) {
+
+
+        // blokuje poruszanie x
+
+        playerX += 0.06;
+
+        player.style.left = playerX * tileSize + 'px';
+        player.style.top = playerY * tileSize + 'px';
+
+        collide = 1
+        return;
+      }
+
+      if (rect1.top < rect2.bottom + 8 && rect1.bottom > rect2.bottom + 2 && rect1.right > rect2.left && rect1.left < rect2.right) {
+
+        playerY += 0.06;
+        // blokuje poruszanie x
+        spgrav = 0
+
+        player.style.left = playerX * tileSize + 'px';
+        player.style.top = playerY * tileSize + 'px';
+
+        collide = 1
+        return;
+      }
+      if (rect1.bottom - 2 > rect2.top - wallThickness && rect1.top < rect2.top && rect1.right > rect2.left + wallThickness && rect1.left < rect2.right - wallThickness) {
+
+        playerY -= 0.01;
+        VelocityY = -0.1;
+        console.log("ok")
+        // blokuje poruszanie x
+        spgrav = 0
+
+        player.style.left = playerX * tileSize + 'px';
+        player.style.top = playerY * tileSize + 'px';
+
+        VelocityY = 0;
+
+        return;
+      } else {
+
+      }
+      if (rect1.bottom + 10 > rect2.top - wallThickness && rect1.top < rect2.top && rect1.right > rect2.left + wallThickness && rect1.left < rect2.right - wallThickness) {
+
+
+        console.log("jump")
+        // blokuje poruszanie x
+        spgrav = 0
+
+        player.style.left = playerX * tileSize + 'px';
+        player.style.top = playerY * tileSize + 'px';
+
+        Topcol = 1
+        return;
+      } else {
+        Topcol = 0;
+      }
+      if (player.x < rect2.x && player.y + 55 > rect2.y && player.y < rect2.y + 55) {
+        rect2.x = player.x - 50;
+      }
+      if (rect1.bottom + 5 >= rect2.top &&
+        rect1.top < rect2.bottom &&
+        rect1.right > rect2.left &&
+        rect1.left < rect2.right) {
+        collide = 1;
+
+        cav = 0
+        return;
+      } else {
+        collide = 0;
+
+      }
+
+
+    }
+    for (let tile of Grass) {
+      const rect1 = player.getBoundingClientRect();
+      const rect2 = tile.getBoundingClientRect();
+      const wallThickness = 2;
+      
+      if (rect1.bottom > rect2.top + 0 &&
+        rect1.top < rect2.bottom - 0 &&
+        rect1.right + 0 > rect2.left + 0 &&
+        rect1.left < rect2.right - 0) {
+        
+        bushes=1
+        
+      } else {
+
+        
+
+      }
+for (let tile of PkCR) {
+  const rect1 = player.getBoundingClientRect();
+  const rect2 = tile.getBoundingClientRect();
+  const wallThickness = 2;
+
+  if (rect1.bottom > rect2.top + 1 &&
+    rect1.top < rect2.bottom - 1 &&
+    rect1.right + 1 > rect2.left + 1 &&
+    rect1.left < rect2.right - 1) {
+
+    health = 100
+    document.getElementById('IdhGf').style.display="block"
+setTimeout(function (){
+  document.getElementById('IdhGf').style.display="none"
+},1000)
+  } else {
+
+
+
+  }
+
+    }
+  }
+  }
+  setTimeout(loop, 200)
+
+  
+  function loop() {
+    if (movePlayer(0, 0)) {
+
+    } else {
+      thix = 0
+      thiy = 0
+    }
+    stick = document.querySelector('.stick');
+    joystick = document.querySelector('.joystick');
+    joystickRect = joystick.getBoundingClientRect();
+    
+    requestAnimationFrame(loop)
+  }
+  var bushes=0;
+  function battle(){
+    console.log("fight")
+    document.getElementById('your_health').style.width = health + '%';
+    
+      
+    document.getElementById('all1').style.display = "block"
+    document.getElementById('all1').classList.add('sk')
+    
+    if(aud){
+      aud.pause()
+     aud = document.getElementById("audio2")
+     aud.play()
+    }
+  //  var aud3 = document.getElementById("saudio")
+    
+   //  aud3.play()
+    
+    
+    setTimeout(function (){
+    
+    },10);
+    
+    
+    
+  }
+</script>
+
+
+
+
+
+
+<audio id="audio2" src="./53 Battle!.mp3"></audio>
+<!--
+<script>
+var aud2 = document.getElementById("audio2")
+setTimeout(function (){
+  document.querySelector("#all1").addEventListener('touchstart', event => {
+ //   aud.currentTime = 0;
+    
+  })
+},200)
+</script>-->
+
+
+<div id="all1">
+
+
+  <div id="game-over" style="display:none ;position:absolute;z-index:3; top:0;left:0;height:100vh;width:100vw;background :black;color:rgba(255,255,255,1)  ;font-size:44px; ">
+    <pre style="position :absolute ; top:50vh; left :50vw; transform:translate(-50%,-50%); font-family:'Courier New'; font-size :10px; text-align :center ">
+You lost My Game
+
+game over
+
+made by krystian kashumy.github.io
+   </pre>
+  </div>
+
+
+    <img style="position:absolute ; bottom :-70px; left:0;filter: url('#pixelate');
+width :350px; height :150px;" src="./board.WebP" alt="" id="board">
+
+    <div id="aelectric">
+
+    </div>
+    <div id="aatack">
+
+    </div>
+    <div id="aatack2">
+
+    </div>
+
+    <img style="position:absolute ; bottom :0vh; left:100px;animation :0.5s stay infinite steps(1) ;
+width :150px; height :150px;" src="./pikachu.WebP" alt="" id="pkmn1">
+
+    <img style="position:absolute ; top :20vh; right:0; filter: url('#pixelate');
+width :300px; height :100px;" src="./board.WebP" alt="" id="board">
+    <img style="position:absolute ; top :15vh; right:90px;animation :1s stay2 infinite steps(1) ;
+width :100px; height :100px;" src="./pikachufront.WebP" alt="" id="pkmn2">
+
+    <img src="./mapl.WebP" id="idf" style="width :100vw;
+height :100vh; top:0px;">
+
+
+
+    <div id="bar2">
+      <div style="width : calc(100% - 0px) ;height :20%; background :#B20C0CB5;">
+        <div id="opponenthp" style="width :100% ; background :red; height :100%; "></div>
+        <div id="pokemon2">
+          <div>
+            pikchu
+          </div>
+          <div id="opplv">
+            2
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bar">
+      <div style="width : calc(100% - 0px) ;height :20%; background :#B20C0CB5;">
+        <div id="your_health" style="width :100% ; background :red; height :100%"></div>
+      </div>
+      <div id="pokemon1">
+        <div>
+          pikchu
+        </div>
+        <div id="ylv">
+          
+        </div>
+      </div>
+      <div id="menu1">
+        <div onclick="bag()" >
+          bag
+        </div>
+        <div onclick="pkmn()">
+          pkmn
+        </div>
+        <div onclick="run()">
+          run
+        </div>
+        <div onclick="fight()">
+          fight
+        </div>
+      </div>
+    </div>
+
+
+    <div id="pkmenu1" onclick="_e(this,this,0)" style="display :none ;margin-left: 10vw;margin-top:10vh;   position:absolute;z-index:8; bottom :40vh;left:0;height:60px;width:80vw;background :rgba(20,20,20,1) ;color:rgba(200,200,200,1)  ;font-size:94%; text-align :center ;">
+      <pre id="text" style="white-space :pre-wrap ">  Your Attack missed
+     </pre>
+    </div>
+
+
+<style>
+  #aelectric {
+    position: absolute;
+    top: 1vh;
+    right: 150px;
+    width: 100px;
+    height: 25vh;
+    display: none;
+    z-index: 1;
+    background: #EBFF0069;
+
+  }
+
+  #aatack {
+    position: absolute;
+    top: 10vh;
+    right: 70px;
+    width: 20vh;
+    height: 20vh;
+    display: none;
+    z-index: 1;
+    background: #AEAEAE6E;
+  }
+
+  #aatack2 {
+    position: absolute;
+    bottom: 10vh;
+    left: 100px;
+    width: 40vh;
+    height: 40vh;
+    display: none;
+    z-index: 1;
+    background: #CC0808B3;
+    border-radius :0%;
+    
+  }
+
+  
+
+  #idf {
+    position :absolute ;
+    z-index :-1;
+    left:0px;
+  }
+
+  #bar {
+    position: absolute;
+
+    bottom: 10vh;
+    z-index: 2;
+    padding: 10px;
+    right: 10px;
+    background: #4848489C;
+    width: 300px;
+    height: 100px;
+  }
+
+  #bar2 {
+    position: absolute;
+    top: 10vh;
+    padding: 10px;
+    z-index: 2;
+    left: 10px;
+    background: #4848489C;
+    width: 300px;
+    height: 100px;
+  }
+
+
+  #bar div {}
+
+  #pokemon1 {
+    margin-top: 5px;
+    background: #B1B1B1;
+    padding: 3px;
+    height: 20px;
+    
+  }
+
+  #pokemon1 div {
+    background: #303030;
+    width: 45%;
+    float: left;
+    color: #FFFFFF;
+    font-size: 50%;
+    padding: 3px;
+    margin-left: 5px;
+
+  }
+
+  
+
+  #pokemon2 {
+    margin-top: 5px;
+    background: #B1B1B1;
+    padding: 3px;
+    height: 20px;
+    
+  }
+
+  #pokemon2 div {
+    background: #303030;
+    width: 45%;
+    float: left;
+    color: #FFFFFF;
+    font-size: 50%;
+    padding: 3px;
+    margin-left: 5px;
+  }
+
+  #menu1 {
+    margin-top: 5px;
+    background: #B1B1B1;
+    padding: 4px;
+    height: 40px;
+    
+  }
+
+  #menu1 div {
+    background: #303030;
+    width: 45%;
+    float: left;
+    color: #FFFFFF;
+    font-size: 50%;
+    padding: 3px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+  }
+
+  .hidepkmn2 {
+    top: 15vh;
+    left: 150vw;
+
+    animation: hid1 2s linear;
+  }
+
+  @keyframes stay {
+    0% {
+      bottom: 0vh;
+    }
+
+    50% {
+      bottom: calc(0vh - 5px);
+    }
+
+    100% {
+      bottom: 0vh;
+    }
+  }
+
+  @keyframes stay2 {
+    0% {
+      top: 15vh;
+    }
+
+    50% {
+      top: calc(15vh - 5px);
+    }
+
+    100% {
+      top: 15vh;
+    }
+  }
+
+  @keyframes hid1 {
+    from {
+      left: calc(100vw - 190px);
+      top: 15vh;
+      right: 90px;
+    }
+
+    to {
+      top: 15vh;
+      left: calc(100vw + 190px);
+    }
+  }
+</style>
+
+
+
+
+
+
+<style>
+  #all1 {
+    position: fixed ;
+    display :none ;
+    
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+  }
+  .sk{
+    opacity :1;
+    animation :s 3s ;
+  }
+  @keyframes s{
+    from{
+      filter: brightness(0) ; 
+      opacity :0;
+    }
+    to{
+      filter: brightness(10deg) ; 
+      opacity :1;
+    }
+  }
+</style>
+
+
+
+
+
+<script>
+var lv=2;
+var berries = 10;
+function bag(){
+  if(berries>-1){
+    health+= 10;
+    document.getElementById('your_health').style.width = health + '%';
+    document.getElementById('pkmenu1').style.display = "block"
+    document.getElementById('text').innerText = `
+    recovered 10 hp`
+    setTimeout(function() {
+      document.getElementById('pkmenu1').style.display = "none "
+    }, 500)
+    berries-=1 ;
+  }
+}
+
+
+var yourpokmnlist = [
+  { "name": "pikachu", "lv": 2, "health": 100, "url": "./pikachu.WebP","attacks": ["tacle", "tundershock"]
+  },
+  { "name": "cyndaquil", "lv": 2, "health": 100, "url": "./cyndaquil.WebP","attacks": ["tacle", "ember"]
+  },
+  { "name": "hunter hunter hunter hunter hunter hunter hunter hunter hunter hunter hunter hunter hunter hunter hunter hunter hunter hunter", "lv": 5, "health": 100, "url": "./hu.WebP",
+  "attacks": ["tacle", "dark", "super_secret"]
+ }
+];
+
+var currentPokemonIndex = 0;
+
+function pkmn() {
+  var nextPokemonIndex = (currentPokemonIndex + 1) % yourpokmnlist.length;
+
+  yourpokmnlist[currentPokemonIndex].lv = lv;
+  yourpokmnlist[currentPokemonIndex].health = health;
+  lv = yourpokmnlist[nextPokemonIndex].lv;
+  health = yourpokmnlist[nextPokemonIndex].health;
+
+  document.getElementById('pkmn1').src = yourpokmnlist[nextPokemonIndex].url;
+
+  setTimeout(function () {
+    document.getElementById('your_health').style.width = health + '%';
+    document.getElementById('ylv').innerText =lv;
+    document.getElementById('pkmenu1').style.display = "block";
+    document.getElementById('text').innerText = ` Come Back Go ${yourpokmnlist[nextPokemonIndex].name} `;
+    setTimeout(function () {
+      document.getElementById('pkmenu1').style.display = "none";
+    }, 500);
+  }, 300);
+
+  currentPokemonIndex = nextPokemonIndex;
+}
+
+
+  function fight() {
+  var currentPokemon = yourpokmnlist[currentPokemonIndex];
+  var attacksHTML = "";
+
+  for (var i = 0; i < currentPokemon.attacks.length; i++) {
+    attacksHTML += `<div onclick='attack("${currentPokemon.attacks[i]}")'>(${i + 1}) ${currentPokemon.attacks[i]}</div>`;
+  }
+
+  document.getElementById('menu1').innerHTML = attacksHTML;
+}
+
+  
+  var opponent = 100;
+  var health = 100
+  var attacks = {
+    "tacle": { "dm": 5, "p": 10 ,"t":"nor"},
+    "tundershock": { "dm": 10, "p": 4 },
+    "shock": { "dm": 5, "p": 1 },
+    "ember": { "dm": 12, "p": 1 },
+    "dark": { "dm": 16, "p": 3 },
+    "shot": { "dm": 15, "p": 3 },
+    "harden": { "dm": 0, "p": 1 },
+    "string": { "dm": 20, "p": 3 },
+    "razorleav": { "dm": 30, "p": 3 },
+    "leav": { "dm": 10, "p": 10  },
+    "drill": { "dm": 15, "p": 10  },
+    "super_secret": { "dm": 150000000, "p": 1  },
+  }
+  opponent_attacks = ["tacle", "tundershock", "shock"]
+
+  var trafić = 0;
+  var opptrafić = 0;
+var dmplus=0;
+var oppdmplus=0;
+
+
+
+
+
+  function attack(a) {
+    
+    document.getElementById('menu1').innerText =""
+    
+  dmplus = (lv - 2) * 1.3;
+  oppdmplus = (opplv - 2) * 1.3;
+  document.getElementById('ylv').innerText = lv;
+
+  // Check if the attack missed
+  if (Math.floor(Math.random() * attacks[a].p) === 1) {
+    document.getElementById('pkmenu1').style.display = 'block';
+    document.getElementById('text').innerText = 'Attack missed';
+    setTimeout(function () {
+      document.getElementById('pkmenu1').style.display = 'none';
+    }, 300);
+  } else {
+    // Calculate attack damage
+    const damage = Math.max(0, attacks[a].dm + dmplus - oppdmplus);
+    opponent -= damage || 2; // If damage is 0, inflict a minimum of 2 damage
+    trafić = 1;
+  }
+
+  if (trafić === 1) {
+    // Handle attack animation display
+    if (a === 'tundershock') {
+      document.getElementById('aelectric').style.display = 'block';
+      setTimeout(function () {
+        document.getElementById('aelectric').style.display = 'none';
+      }, 500);
+    } else {
+      document.getElementById('aatack').style.display = 'block';
+      setTimeout(function () {
+        document.getElementById('aatack').style.display = 'none';
+      }, 500);
+    }
+    trafić = 0;
+  }
+
+  // Opponent's attack
+  const randomopponentattack = opponent_attacks[Math.floor(Math.random() * 3)];
+  setTimeout(function () {
+    document.getElementById('pkmenu1').style.display = 'block';
+    document.getElementById('text').innerText = `Opponent used ${randomopponentattack}`;
+    setTimeout(function () {
+      document.getElementById('pkmenu1').style.display = 'none';
+    }, 1000);
+
+    if (Math.floor(Math.random() * attacks[a].p) === 1) {
+      setTimeout(function () {
+        document.getElementById('pkmenu1').style.display = 'block';
+        document.getElementById('text').innerText = 'Opponent attack missed';
+        setTimeout(function () {
+          document.getElementById('pkmenu1').style.display = 'none';
+        }, 500);
+      }, 1500);
+    } else {
+      // Calculate opponent's attack damage
+      const opponentDamage = Math.max(0, attacks[randomopponentattack].dm + oppdmplus - dmplus);
+      health -= opponentDamage || 1; // If damage is 0, inflict a minimum of 1 damage
+      opptrafić = 1;
+      document.getElementById('your_health').style.width = health + '%';
+
+      if (opptrafić === 1) {
+        if (attacks[randomopponentattack] === 'tundershock') {
+          document.getElementById('aatack2').style.display = 'block';
+          setTimeout(function () {
+            document.getElementById('aelectric').style.display = 'none';
+          }, 500);
+        } else {
+          document.getElementById('aatack2').style.display = 'block';
+          setTimeout(function () {
+            document.getElementById('aatack2').style.display = 'none';
+          }, 500);
+        }
+        opptrafić = 0;
+      }
+    }
+  }, 500);
+
+  setTimeout(function () {
+    // Update health and display battle outcome
+    document.getElementById('your_health').style.width = health + '%';
+    document.getElementById('opponenthp').style.width = opponent + '%';
+
+    if (opponent <= 0) {
+      document.getElementById('opponenthp').style.width = 0 + '%';
+      document.getElementById('pkmn2').classList.add('hidepkmn2');
+
+      setTimeout(function () {
+        document.getElementById('pkmenu1').style.display = 'block';
+        lv += Math.floor(Math.random() * 3);
+        if (Math.floor(Math.random() * 3) === 1) {
+          berries += 4;
+        }
+        document.getElementById('text').innerText = `The opponent lost the battle. You win 100 G and earned ${lv} lv and have ${berries}`;
+        document.getElementById('menu1').innerHTML = ``;
+
+        setTimeout(function () {
+          document.getElementById('pkmenu1').style.display = 'none';
+          reset();
+        }, 5000);
+      }, 2500);
+    }
+
+    if (health <= 0) {
+      document.getElementById('your_health').style.width = 0 + '%';
+      document.getElementById('game-over').style.display = 'block';
+    }
+  }, 1500);
+
+  // Restore menu options after the attack is completed
+  setTimeout(function () {
+    document.getElementById('menu1').innerHTML = `
+      <div onclick="bag()">bag</div>
+      <div onclick="pkmn()">pkmn</div>
+      <div onclick="run()">run</div>
+      <div onclick="fight()">fight</div>
+    `;
+  }, 2500);
+}
+
+let randpokemon=0
+var opplv=2.25;
+var killedPokemons=0;
+
+  function reset(){
+    document.getElementById('ylv').innerText =lv;
+    killedPokemons+=1;
+    if(killedPokemons<2){
+    opplv=Math.floor(Math.random()*2)+2.5;
+    }else if (killedPokemons < 4) {
+      opplv = Math.floor(Math.random() * 5) + 2.5;
+    } else if (killedPokemons < 6) {
+      opplv = Math.floor(Math.random() * 8) + 2.5;
+    }else if (killedPokemons < 10) {
+      opplv = Math.floor(Math.random() * 10) + 2.5;
+    }else if (killedPokemons < 15) {
+      opplv = Math.floor(Math.random() * 15) + 2.5;
+    }else if (killedPokemons < 35) {
+      opplv = Math.floor(Math.random() * 20) + 2.5;
+    }
+    
+    document.getElementById('opplv').innerText =opplv
+    opponent_attacks = ["tacle", "tundershock", "shock"]
+  
+  
+     randpokemon=Math.floor(Math.random()*6)
+     if (randpokemon == 0) {
+       // metapod
+       opplv+=2;
+       document.getElementById('pkmn2').src = "./pikachufront.WebP"
+       opponent_attacks = ["tundershock", "tacle", "tundershock"]
+     }else
+    if(randpokemon==1){
+      // metapod
+      document.getElementById('pkmn2').src="./tile_311 (12).WebP"
+      opponent_attacks = ["harden","harden","harden"]
+    }else if (randpokemon==2) {
+      // weedle
+      document.getElementById('pkmn2').src = "./tile_311 (14).WebP"
+      opponent_attacks = ["string","tacle","harden"]
+    }else if (randpokemon == 3) {
+      // kakuna
+      document.getElementById('pkmn2').src = "./tile_311 (15).WebP"
+      opponent_attacks = ["harden","harden","harden"]
+    }else if (randpokemon == 4) {
+      // kakuna
+      document.getElementById('pkmn2').src = "./tile_311 (16).WebP"
+      opponent_attacks = ["drill", "shot", "tacle"]
+    }else if (randpokemon == 5) {
+      // kakuna
+      document.getElementById('pkmn2').src = "./tile_311 (1).WebP"
+      opponent_attacks = ["leav", "tacle", "leav"]
+    }else if (randpokemon == 6) {
+      // kakuna
+      document.getElementById('pkmn2').src = "./tile_311 (1).WebP"
+      opponent_attacks = ["leav", "razorleav", "tacle"]
+    }
+    
+    document.getElementById('pkmn2').classList.remove('hidepkmn2')
+    
+    document.getElementById('menu1').innerHTML = `
+        <div onclick="bag()">
+                      bag
+                    </div>
+                    <div onclick="pkmn()">
+                      pkmn
+                    </div>
+                    <div onclick="run()">
+                      run
+                    </div>
+                    <div onclick="fight()">
+                      fight
+                    </div>
+    `;
+    document.getElementById('your_health').style.width = health + '%';
+    opponent=100;
+    document.getElementById('opponenthp').style.width = opponent + '%';
+    
+    
+    hidefight()
+    toonce = 0
+    aud2.currentTime = 0;
+    aud2.pause()
+    
+    
+  };
+</script>
+</div>
+
+<script>
+  function hidefight(){
+    document.getElementById('all1').style.display = "none"
+    document.getElementById('all1').classList.remove('sk')
+    bushes =0;
+    setTimeout(updateall,500)
+    
+          aud.pause()
+          aud = document.getElementById("audio")
+          aud.play()
+  }
+</script> 
+
+
+
+<style> .S3J5c3RpYW5QS2FzaHVteUdpdGh1Ykd1aWJoc05leGF0dXJpb24{position:inline-block;display:inline-block;margin:0 5px;border-radius:0px;padding:8px 10px;background-color:#2b2b2b;border:1px solid #888;color:#fff;}.S3J5c3RpYW5QS2FzaHVteUdpdGh1Ykd1aWJoc05leGF0dXJpb24-content{visibility:hidden;opacity:0;position:fixed ;z-index:999999;top:50vh;left:50vw;transform:translate(-50%,-50%);background-color:#2b2b2b;min-width:100px;height:auto;padding:8px;z-index:1;border:1px solid #888;transition:visibility 0s,opacity 0.5s;}.S3J5c3RpYW5QS2FzaHVteUdpdGh1Ykd1aWJoc05leGF0dXJpb24:hover .S3J5c3RpYW5QS2FzaHVteUdpdGh1Ykd1aWJoc05leGF0dXJpb24-content{visibility:visible;opacity:1;} 
+
+</style>
+
+<div style="position :fixed ; bottom :10px; left :10px;" class="S3J5c3RpYW5QS2FzaHVteUdpdGh1Ykd1aWJoc05leGF0dXJpb24">O GRZE<div class="S3J5c3RpYW5QS2FzaHVteUdpdGh1Ykd1aWJoc05leGF0dXJpb24-content">Nazywam się krystian i to ja zrobiłem te grę
+<br>
+<pre style="white-space :pre-wrap; height :200px; overflow :hidden ;overflow :scroll ;">
+  
+Gra jest ekspertalna wiec może nie działać poprawnie 
+
+gra była kodowana od podstaw od niczego
+
+od tak zwanej pustej linijki
+gra jest open source więc możesz ja rozwijać 
+
+
+
+
+# Tutorial
+
+<hr>
+
+Joystick na urządzeniach mobilnych 
+służy do poruszania przyzwyczaj 
+się do jego urzywania
+
+przycisk na dole po prawej to przycisk biegania 
+a na gurze to przycisk menu bagaż informacje
+
+
+jeżeli grałeś już w gry typu FireRed to będzie ci latwiej
+
+
+Twoim zadaniem jest pokonywać pokemony i zdobywać wyzszy lewel
+
+<img style="width: 50px;height :50px;"  srcset="./2023-08-06_10.31.39.WebP" src="./2023-08-06_10.31.39.WebP" alt="./2023-08-06_10.31.39.WebP">
+
+  ^ ~~ TEN BLOK MOZESZ W NIM ZALEŚĆ POKEMONA ŚREDNIA SZANSA
+  ok 5 %
+  
+  
+# Co MA
+<hr>
+
+- posiada sczelne optymalizację przez co gra chodzi jak ludzie po bulki
+dzieki temu gra ma ok 20 / 30 fps nawet na slabych urządzeniach
+- oczywiście gra może działać z byt plynnie przez co gracz może wypaść poza mape 
+- Ma Wybur pokemonów i zabijanie pokemonów
+
+
+
+
+
+
+
+
+# Co dodam 
+<hr>
+
+dodam
+
+<details>
+1. poke balle
+2. poke market
+3. nowe mapy
+4. trenera 
+5. ekwipunek na itemy
+</details>
+
+
+<details>
+  - music junichi masuda, go ichinose 
+  New Bark Town
+  
+</details>
+
+# MAPA
+<hr>
+
+```
+
+    [2]
+     |
+[1]  |    [3]
+ \---------/
+
+```
+1 - your house 
+2 - forest
+3 - pokecenter
+
+
+
+</pre>
+</div></div>
+
+
+
+<div style="position :fixed ; top :10px; right :10px;" class="S3J5c3RpYW5QS2FzaHVteUdpdGh1Ykd1aWJoc05leGF0dXJpb24">MAP<div class="S3J5c3RpYW5QS2FzaHVteUdpdGh1Ykd1aWJoc05leGF0dXJpb24-content">MAP MENU
+<br>
+<pre style="white-space :pre-wrap; height :200px; overflow :hidden ;overflow :scroll ;">
+
+
+# MAPA
+<hr>
+
+```
+
+    [2]
+     |
+[1]  |    [3]
+ \---------/
+  |   |
+  ----- [4]
+      ¦
+      ¦
+     [5]
+
+```
+1 - your house 
+2 - forest
+3 - pokecenter
+4 - comming soon poke market
+¦ - comming soon
+5 - comming soon trainer SELA ELAINE
+
+
+</pre>
+</div></div>
