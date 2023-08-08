@@ -9,9 +9,16 @@ pokemon based game
   the other pkmn games
 
   for now
+
+  My Graphick my code 
+  and my remake
 </pre>
 
 - Play
-https://kashumy.github.io/Pokemon-Web/
+
+[ [PokeWeb](https://kashumy.github.io/Pokemon-FireWeb/) ]
 
 ⭐ give me star :)
+
+
+
