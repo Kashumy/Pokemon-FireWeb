@@ -1,3 +1,8 @@
+# New version 
+
+https://kashumy.itch.io/pokemon-fireweb 
+
+
 # Pokemon-Web
 pokemon but in web
 
